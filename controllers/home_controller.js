@@ -1,3 +1,19 @@
+// importing database schema 
+const ToDo=require('../models/todo_card');
+
+
+// function to render home page and todo list
 module.exports.home=function(req,res){
-    return res.end('<h1>Controller running</h1>');
+    ToDo.find({}, function(err, todoItem){
+        if(err){
+            console.log('Error');
+            return;
+        }
+
+        return res.render('home',{
+            title:'TODO List',
+            todo_list:todoItem
+        });
+        
+    });
 }

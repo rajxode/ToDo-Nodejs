@@ -2,17 +2,79 @@
 
     <head>
         <title>
-
+            <%= title%>
         </title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/style.css">
     </head>
 
     <body>
     
         <div class="container">
 
-            <p>
-                This is a paragraph
-            </p>
+            <h1>TODO App</h1>
+
+            <div id="form_container">
+
+                <form action="/newItem" method="post">
+
+                    <table>
+
+                        <tr>
+                            <td colspan="2">
+                                <label for="description">Description</label><br>
+                                <input type="text" id="description" name="description">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="dropdown">Categories</label><br>
+                                <input type="text" id="dropdown" name="category">
+                            </td>
+
+                            <td>
+                                <label for="date">Due Date</label><br>
+                                <input type="date" id="date" name="date">
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <div id="button_container">
+                        <button type="submit">Add Task</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div>
+
+                <ul>
+
+                    <% for (let i of todo_list) { %>
+                        <li class="list_item">
+                            <div class="task_detail">
+                                <span><%= i.description %></span>
+                                <span><%= i.category %></span>
+                                <span><%= i.date %></span>
+                            </div>
+                            
+        
+        
+                            <div class="delete_icon">
+                                <a href="/deleteItem/?id=<%=i._id%>">  
+                                    <i class="fa-regular fa-trash"></i>
+                                </a>
+                            </div>
+                        </li>
+
+                    <% } %>
+                    
+                </ul>
+
+            </div>
 
         </div>
 
