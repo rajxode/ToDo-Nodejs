@@ -4,70 +4,140 @@
         <title>
             <%= title%>
         </title>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <link rel="stylesheet" href="/css/style.css">
+        <script
+        src="https://kit.fontawesome.com/9c250245e3.js"
+        crossorigin="anonymous"
+        ></script>
     </head>
 
     <body>
     
+        <!-- app container -->
         <div class="container">
 
-            <h1>TODO App</h1>
+            <!-- app heading  -->
+            <h1 id="heading">TODO App</h1>
 
+            <!-- form container -->
             <div id="form_container">
 
+                <!-- form to get user data  -->
                 <form action="/newItem" method="post">
 
-                    <table>
+                    <!-- horizontal line -->
+                    <hr>
 
-                        <tr>
-                            <td colspan="2">
-                                <label for="description">Description</label><br>
-                                <input type="text" id="description" name="description">
-                            </td>
-                        </tr>
+                    <!-- task description  -->
+                    <div id="description_box">
 
-                        <tr>
-                            <td>
-                                <label for="dropdown">Categories</label><br>
-                                <input type="text" id="dropdown" name="category">
-                            </td>
+                        <label for="description">DESCRIPTION</label><br>
+                        <input type="text" id="description" name="description" placeholder="what do we need to do?">
 
-                            <td>
-                                <label for="date">Due Date</label><br>
-                                <input type="date" id="date" name="date">
-                            </td>
-                        </tr>
-
-                    </table>
-
-                    <div id="button_container">
-                        <button type="submit">Add Task</button>
                     </div>
+                        
+                    <hr>
+
+
+                    <!-- for task category and due date of task -->
+                    <div id="cat_and_date">
+
+                        <div id="category_box">
+
+                            <!-- dropdown menu for task category -->
+                            <label for="dropdown">CATEGORY</label><br>
+                            <select id="dropdown" name="category">
+                                <option value="n/a">Choose an option</option>
+                                <option value="Personal">Personal</option>
+                                <option value="School">School</option>
+                                <option value="Work">Work</option>
+                                <option value="Cleaning">Cleaning</option>
+                                <option value="Others">Others</option>
+                            </select>
+
+                        </div>
+                        
+                        <!-- due date -->
+                        <div id="date_box">
+
+                            <label for="date">DUE DATE</label><br>
+                            <input type="date" id="date" name="date">
+
+                        </div>
+                        
+
+                    </div>
+                        
+                    <hr>
+
+                    <!-- buttons for add and delete -->
+                    <div class="btn_container">
+
+                        <!-- add button -->
+                        <button type="submit" class="btn" id="add_btn">
+                            <span><i class="fa-solid fa-plus"></i></span>
+                            <span>Add Task</span>
+                        </button>
+
+                        <!-- delete button -->
+                        <button type="reset" class="btn" id="del_btn">
+                            <span><i class="fa-solid fa-trash"></i></span>
+                            <span>Delete Task</span>
+                        </button>
+                    </div>
+
 
                 </form>
 
             </div>
 
-            <div>
+            <!-- list containing all tasks -->
+            <div id="task_list">
 
-                <ul>
+                <ul class="custom_list">
 
+                    <!-- showing list items  -->
                     <% for (let i of todo_list) { %>
                         <li class="list_item">
-                            <div class="task_detail">
-                                <span><%= i.description %></span>
-                                <span><%= i.category %></span>
-                                <span><%= i.date %></span>
+
+                            <hr>
+
+                            <!-- task item container -->
+                            <div class="task_container">
+                                
+                                <!-- check box to show task status  -->
+                                <div id="checkbox_container">
+                                    <input type="checkbox" id="work_status" name="work_status">
+                                </div>
+
+
+                                <!-- task description and due date -->
+                                <div class="task_detail">
+                                    <div id="task_descripition">
+                                        <%= i.description %>
+                                    </div>
+                                    <span><i class="fa-solid fa-calendar-days"></i></span>
+                                    <span><%= i.date %></span>
+                                </div>
+                                
+
+                                <!-- for deleting single task and category -->
+                                <div class="delete_and_cat">
+                                    <div id="del_box">
+                                        <a href="/deleteItem/?id=<%=i._id%>">  
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </div>
+                                    
+                                    
+                                    <div id="cat_box">
+                                            <%= i.category %>
+                                    </div>
+                                    
+                                </div>
+
                             </div>
                             
-        
-        
-                            <div class="delete_icon">
-                                <a href="/deleteItem/?id=<%=i._id%>">  
-                                    <i class="fa-regular fa-trash"></i>
-                                </a>
-                            </div>
                         </li>
 
                     <% } %>
@@ -78,5 +148,7 @@
 
         </div>
 
+        <!-- javascript file -->
+        <script src="/js/index.js"></script>
     </body>
 </html>

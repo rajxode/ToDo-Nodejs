@@ -1,7 +1,153 @@
+/* importing google font */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
+
+
+/* basic body styles */
 body{
     margin: 0px;
-    color: blueviolet;
+    background-color: #c0c3c7;
+    font-family:'Raleway';
+}
+
+/* scrollbar styling  */
+
+::-webkit-scrollbar{
+    width: 5px;
+}
+
+::-webkit-scrollbar-track{
+    background-color: rgb(94, 86, 86);
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: black;
 }
 
 
+/* app container */
+.container{
+    background-color: white;
+    margin: auto;
+    margin-top: 2rem;
+    width:400px;
+    height:500px;
+    box-shadow: 0 0 2px 5px grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+/* common styles for div within the container  */
+.container > div{
+    width:100%;
+    margin-left: 0px;
+}
+
+
+/* app heading  */
+#heading{
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+/* input box containing task description in the form  */
+#description_box{
+    padding-left: 5px;
+}
+/* category and date segment in the input box  */
+#cat_and_date{
+    display: flex;
+}
+
+/* styling div within date and category */
+#cat_and_date > div{
+    width: 50%;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+
+/* box containing task category */
+#category_box{
+    border-right: 1px solid grey;
+}
+
+
+/* div containing buttons for add and delete task */
+.btn_container{
+    text-align: center;
+}
+
+/* common style for both buttons  */
+.btn{
+    width:100px;
+    height: 40px;
+    border: none;
+    color: white;
+}
+
+
+/* add button  */
+#add_btn{
+    background-color: rgba(238, 79, 58, 0.863);
+}
+
+
+/* delete button  */
+#del_btn{
+    background-color: rgb(41, 39, 39);
+}
+
+
+/* customizing list  */
+.custom_list{
+    width: 98%;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 5px;
+    text-decoration: none;
+    /* width: inherit; */
+}
+
+#task_list{
+    height: 40%;
+    overflow-y: scroll;
+}
+
+.task_container{
+    display: flex;
+}
+
+.delete_and_cat{
+    margin-left:42%;
+    display: flex;
+}
+
+#del_box{
+    margin-top: 8px;
+}
+
+#cat_box{
+    margin-left: 5%;
+    height: 25px;
+    width: 80px;
+    color: white;
+    text-align: center;
+    font-size: 0.9rem;
+    padding-top: 5px;
+    border-radius: 5%;
+    background-color: red;
+}
+
+
+/* removing borders form input box */
+input,select {
+    border: none;
+}
+
+/* removing text decorations from anchor tag */
+a{
+    text-decoration: none;
+    color: inherit;
+}
