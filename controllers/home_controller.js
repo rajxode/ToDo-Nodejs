@@ -11,7 +11,7 @@ var bgcolors={
 };
 
 
-// function to render home page and todo list
+// function to render home page and todo list with category colors
 module.exports.home=function(req,res){
     ToDo.find({}, function(err, todoItem){
         if(err){

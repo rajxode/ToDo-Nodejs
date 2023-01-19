@@ -1,10 +1,16 @@
 <html>
 
     <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
             ToDo App
         </title>
+        <!-- app icon in searchbar -->
+        <link rel="icon" type="image/x-icon" href="/images/icon.png">
         <link rel="stylesheet" href="/css/style.css">
+        <!-- font awesome link -->
         <script
         src="https://kit.fontawesome.com/9c250245e3.js"
         crossorigin="anonymous"
@@ -84,7 +90,7 @@
                             <span>Add Task</span>
                         </button>
 
-                        <!-- delete button -->
+                        <!-- delete button to delete all the completed task from the list of task -->
                         <button type="submit" class="btn" id="del_btn" form="todo_list">
                             <span><i class="fa-solid fa-trash"></i></span>
                             <span>Delete Task</span>
@@ -99,6 +105,7 @@
             <!-- list containing all tasks -->
 
             <div id="task_list">
+
 
                 <form action="/deleteItem/multi" method="post" id="todo_list">
 
@@ -131,13 +138,16 @@
 
                                     <!-- for deleting single task and category -->
                                     <div class="delete_and_cat">
+                                        
+                                        <!-- deleting single task from the list  -->
                                         <div id="del_box">
                                             <a href="/deleteItem/?id=<%=i._id%>">  
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
                                         </div>
                                         
-                                        
+
+                                        <!-- task category -->
                                         <div id="cat_box" style="background-color: <%= color_list[i.category] %>;">
                                                 <%= i.category %>
                                         </div>
