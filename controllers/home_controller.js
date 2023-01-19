@@ -1,6 +1,15 @@
 // importing database schema 
 const ToDo=require('../models/todo_card');
 
+//background color for different task category 
+var bgcolors={
+    Personal:"#c72279",
+    Work:"red",
+    School:"violet",
+    Cleaning:"blue",
+    Others:"green",
+};
+
 
 // function to render home page and todo list
 module.exports.home=function(req,res){
@@ -11,8 +20,8 @@ module.exports.home=function(req,res){
         }
 
         return res.render('home',{
-            title:'TODO List',
-            todo_list:todoItem
+            todo_list:todoItem,
+            color_list:bgcolors,
         });
         
     });

@@ -2,7 +2,7 @@
 
     <head>
         <title>
-            <%= title%>
+            ToDo App
         </title>
         <link rel="stylesheet" href="/css/style.css">
         <script
@@ -32,7 +32,12 @@
                     <div id="description_box">
 
                         <label for="description">DESCRIPTION</label><br>
-                        <input type="text" id="description" name="description" placeholder="what do we need to do?">
+                        <input 
+                        type="text" 
+                        id="description" 
+                        name="description" 
+                        placeholder="what do we need to do?"
+                        required>
 
                     </div>
                         
@@ -46,8 +51,8 @@
 
                             <!-- dropdown menu for task category -->
                             <label for="dropdown">CATEGORY</label><br>
-                            <select id="dropdown" name="category">
-                                <option value="n/a">Choose an option</option>
+                            <select id="dropdown" name="category" required>
+                                <option value="" disabled hidden selected>Choose an option</option>
                                 <option value="Personal">Personal</option>
                                 <option value="School">School</option>
                                 <option value="Work">Work</option>
@@ -61,7 +66,7 @@
                         <div id="date_box">
 
                             <label for="date">DUE DATE</label><br>
-                            <input type="date" id="date" name="date">
+                            <input type="date" id="date" name="date" required>
 
                         </div>
                         
@@ -80,7 +85,7 @@
                         </button>
 
                         <!-- delete button -->
-                        <button type="reset" class="btn" id="del_btn">
+                        <button type="submit" class="btn" id="del_btn" form="todo_list">
                             <span><i class="fa-solid fa-trash"></i></span>
                             <span>Delete Task</span>
                         </button>
@@ -92,57 +97,62 @@
             </div>
 
             <!-- list containing all tasks -->
+
             <div id="task_list">
 
-                <ul class="custom_list">
+                <form action="/deleteItem/multi" method="post" id="todo_list">
 
-                    <!-- showing list items  -->
-                    <% for (let i of todo_list) { %>
-                        <li class="list_item">
+                    <ul class="custom_list">
 
-                            <hr>
+                        <!-- showing list items  -->
+                        <% for (let i of todo_list) { %>
+                            <li class="list_item">
 
-                            <!-- task item container -->
-                            <div class="task_container">
+                                <hr>
+
+                                <!-- task item container -->
+                                <div class="task_container">
+                                    
+                                    <!-- check box to show task status  -->
+                                    <div id="checkbox_container">
+                                        <input type="checkbox" id="<%= i.id %>" value="<%= i.id %>" name="id">
+                                    </div>
+
+
+                                    <!-- task description and due date -->
+                                    <div class="task_detail">
+                                        <div id="task_descripition">
+                                            <%= i.description %>
+                                        </div>
+                                        <span><i class="fa-solid fa-calendar-days"></i></span>
+                                        <span id="due_date"><%= i.date %></span>
+                                    </div>
+                                    
+
+                                    <!-- for deleting single task and category -->
+                                    <div class="delete_and_cat">
+                                        <div id="del_box">
+                                            <a href="/deleteItem/?id=<%=i._id%>">  
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </div>
+                                        
+                                        
+                                        <div id="cat_box" style="background-color: <%= color_list[i.category] %>;">
+                                                <%= i.category %>
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>
                                 
-                                <!-- check box to show task status  -->
-                                <div id="checkbox_container">
-                                    <input type="checkbox" id="work_status" name="work_status">
-                                </div>
+                            </li>
 
-
-                                <!-- task description and due date -->
-                                <div class="task_detail">
-                                    <div id="task_descripition">
-                                        <%= i.description %>
-                                    </div>
-                                    <span><i class="fa-solid fa-calendar-days"></i></span>
-                                    <span><%= i.date %></span>
-                                </div>
-                                
-
-                                <!-- for deleting single task and category -->
-                                <div class="delete_and_cat">
-                                    <div id="del_box">
-                                        <a href="/deleteItem/?id=<%=i._id%>">  
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
-                                    </div>
-                                    
-                                    
-                                    <div id="cat_box">
-                                            <%= i.category %>
-                                    </div>
-                                    
-                                </div>
-
-                            </div>
-                            
-                        </li>
-
-                    <% } %>
-                    
-                </ul>
+                        <% } %>
+                        
+                    </ul>
+                
+                </form>
 
             </div>
 

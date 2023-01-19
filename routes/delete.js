@@ -10,6 +10,6 @@ const deleteController=require('../controllers/delete_controller');
 // calling delete function in controller
 router.get('/',deleteController.delTask);
 
-
+router.post('/multi',deleteController.delMultiTask);
 // exporting router for use outside the router
 module.exports = router;
