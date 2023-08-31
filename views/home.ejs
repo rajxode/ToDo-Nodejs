@@ -18,154 +18,157 @@
     </head>
 
     <body>
-    
-        <!-- app container -->
-        <div class="container">
+        
+        <div class="mainContainer">
 
-            <!-- app heading  -->
-            <h1 id="heading">TODO App</h1>
+            <!-- app container -->
+            <div class="appContainer">
 
-            <!-- form container -->
-            <div id="form_container">
+                <!-- app heading  -->
+                <h1 id="heading">TODO App</h1>
 
-                <!-- form to get user data  -->
-                <form action="/newItem" method="post">
+                <!-- form container -->
+                <div id="form_container">
 
-                    <!-- horizontal line -->
-                    <hr>
+                    <!-- form to get user data  -->
+                    <form action="/newItem" method="post">
 
-                    <!-- task description  -->
-                    <div id="description_box">
+                        <!-- horizontal line -->
+                        <hr>
 
-                        <label for="description">DESCRIPTION</label><br>
-                        <input 
-                        type="text" 
-                        id="description" 
-                        name="description" 
-                        placeholder="what do we need to do?"
-                        required>
+                        <!-- task description  -->
+                        <div id="description_box">
 
-                    </div>
-                        
-                    <hr>
-
-
-                    <!-- for task category and due date of task -->
-                    <div id="cat_and_date">
-
-                        <div id="category_box">
-
-                            <!-- dropdown menu for task category -->
-                            <label for="dropdown">CATEGORY</label><br>
-                            <select id="dropdown" name="category" required>
-                                <option value="" disabled hidden selected>Choose an option</option>
-                                <option value="Personal">Personal</option>
-                                <option value="School">School</option>
-                                <option value="Work">Work</option>
-                                <option value="Cleaning">Cleaning</option>
-                                <option value="Others">Others</option>
-                            </select>
+                            <label for="description">DESCRIPTION</label><br>
+                            <input 
+                                type="text" 
+                                id="description" 
+                                name="description" 
+                                placeholder="what do we need to do?"
+                                required>
 
                         </div>
-                        
-                        <!-- due date -->
-                        <div id="date_box">
+                            
+                        <hr>
 
-                            <label for="date">DUE DATE</label><br>
-                            <input type="date" id="date" name="date" required>
+
+                        <!-- for task category and due date of task -->
+                        <div id="cat_and_date">
+
+                            <div id="category_box">
+
+                                <!-- dropdown menu for task category -->
+                                <label for="dropdown">CATEGORY</label><br>
+                                <select id="dropdown" name="category" required>
+                                    <option value="" disabled hidden selected>Choose an option</option>
+                                    <option value="Personal">Personal</option>
+                                    <option value="School">School</option>
+                                    <option value="Work">Work</option>
+                                    <option value="Cleaning">Cleaning</option>
+                                    <option value="Others">Others</option>
+                                </select>
+
+                            </div>
+                            
+                            <!-- due date -->
+                            <div id="date_box">
+
+                                <label for="date">DUE DATE</label><br>
+                                <input type="date" id="date" name="date" required>
+
+                            </div>
+                            
 
                         </div>
-                        
+                            
+                        <hr>
 
-                    </div>
-                        
-                    <hr>
+                        <!-- buttons for add and delete -->
+                        <div class="btn_container">
 
-                    <!-- buttons for add and delete -->
-                    <div class="btn_container">
+                            <!-- add button -->
+                            <button type="submit" class="btn" id="add_btn">
+                                <span><i class="fa-solid fa-plus"></i></span>
+                                <span>Add Task</span>
+                            </button>
 
-                        <!-- add button -->
-                        <button type="submit" class="btn" id="add_btn">
-                            <span><i class="fa-solid fa-plus"></i></span>
-                            <span>Add Task</span>
-                        </button>
-
-                        <!-- delete button to delete all the completed task from the list of task -->
-                        <button type="submit" class="btn" id="del_btn" form="todo_list">
-                            <span><i class="fa-solid fa-trash"></i></span>
-                            <span>Delete Task</span>
-                        </button>
-                    </div>
+                            <!-- delete button to delete all the completed task from the list of task -->
+                            <button type="submit" class="btn" id="del_btn" form="todo_list">
+                                <span><i class="fa-solid fa-trash"></i></span>
+                                <span>Delete Task</span>
+                            </button>
+                        </div>
 
 
-                </form>
+                    </form>
+
+                </div>
+
+                <!-- list containing all tasks -->
+
+                <div id="task_list">
+
+
+                    <form action="/deleteItem/multi" method="post" id="todo_list">
+
+                        <ul class="custom_list">
+
+                            <!-- showing list items  -->
+                            <% for (let i of todo_list) { %>
+                                <li class="list_item">
+
+                                    <hr>
+
+                                    <!-- task item container -->
+                                    <div class="task_container">
+                                        
+                                        <!-- check box to show task status  -->
+                                        <div id="checkbox_container">
+                                            <input type="checkbox" id="<%= i.id %>" value="<%= i.id %>" name="id">
+                                        </div>
+
+
+                                        <!-- task description and due date -->
+                                        <div class="task_detail">
+                                            <div id="task_descripition">
+                                                <%= i.description %>
+                                            </div>
+                                            <span><i class="fa-solid fa-calendar-days"></i></span>
+                                            <span id="due_date"><%= i.date %></span>
+                                        </div>
+                                        
+
+                                        <!-- for deleting single task and category -->
+                                        <div class="delete_and_cat">
+                                            
+                                            <!-- deleting single task from the list  -->
+                                            <div id="del_box">
+                                                <a href="/deleteItem/?id=<%=i._id%>">  
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </div>
+                                            
+
+                                            <!-- task category -->
+                                            <div id="cat_box" style="background-color: <%= color_list[i.category] %>;">
+                                                    <%= i.category %>
+                                            </div>
+                                            
+                                        </div>
+
+                                    </div>
+                                    
+                                </li>
+
+                            <% } %>
+                            
+                        </ul>
+                    
+                    </form>
+
+                </div>
 
             </div>
-
-            <!-- list containing all tasks -->
-
-            <div id="task_list">
-
-
-                <form action="/deleteItem/multi" method="post" id="todo_list">
-
-                    <ul class="custom_list">
-
-                        <!-- showing list items  -->
-                        <% for (let i of todo_list) { %>
-                            <li class="list_item">
-
-                                <hr>
-
-                                <!-- task item container -->
-                                <div class="task_container">
-                                    
-                                    <!-- check box to show task status  -->
-                                    <div id="checkbox_container">
-                                        <input type="checkbox" id="<%= i.id %>" value="<%= i.id %>" name="id">
-                                    </div>
-
-
-                                    <!-- task description and due date -->
-                                    <div class="task_detail">
-                                        <div id="task_descripition">
-                                            <%= i.description %>
-                                        </div>
-                                        <span><i class="fa-solid fa-calendar-days"></i></span>
-                                        <span id="due_date"><%= i.date %></span>
-                                    </div>
-                                    
-
-                                    <!-- for deleting single task and category -->
-                                    <div class="delete_and_cat">
-                                        
-                                        <!-- deleting single task from the list  -->
-                                        <div id="del_box">
-                                            <a href="/deleteItem/?id=<%=i._id%>">  
-                                                <i class="fa-solid fa-trash"></i>
-                                            </a>
-                                        </div>
-                                        
-
-                                        <!-- task category -->
-                                        <div id="cat_box" style="background-color: <%= color_list[i.category] %>;">
-                                                <%= i.category %>
-                                        </div>
-                                        
-                                    </div>
-
-                                </div>
-                                
-                            </li>
-
-                        <% } %>
-                        
-                    </ul>
-                
-                </form>
-
-            </div>
-
         </div>
 
         <!-- javascript file -->
